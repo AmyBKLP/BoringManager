@@ -13,13 +13,15 @@ staticButton::staticButton(const QString &icon, int num,QWidget *parent)
 {
     this->setAttribute(Qt::WA_TranslucentBackground); //设置窗口透明化
     QPixmap pixmap(icon);
+
     for(int i=0 ; i != m_num; i++ )
     {
-        m_pixList.append(pixmap.copy(i*(pixmap.width()/m_num),
+        m_pixList.append(pixmap.copy(
+                                     i*(pixmap.width()/m_num),
                                      0,
                                      pixmap.width()/m_num,
                                      pixmap.height())
-                         );
+                         ); //pixmap.copy(QRect)
     }
     m_currentPix = m_pixList.at(0);
     this->setFixedSize(m_currentPix.size());
@@ -59,9 +61,9 @@ void staticButton::setOneButtonInfo(const QString &icon, int num)
 }
 void staticButton::setDivisionButtonInfo(const QString &icon, int num)
 {
-    m_pixList.append(QPixmap(icon+"_normal"));
-    m_pixList.append(QPixmap(icon+"_hover"));
-    m_pixList.append(QPixmap(icon+"_press"));
+    m_pixList.append(QPixmap(icon + "_normal"));
+    m_pixList.append(QPixmap(icon + "_hover"));
+    m_pixList.append(QPixmap(icon + "_press"));
     if(num == 4)
         m_pixList.append(QPixmap(icon+"_disable"));
     m_num = num ;
